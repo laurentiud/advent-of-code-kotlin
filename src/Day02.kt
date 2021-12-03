@@ -4,34 +4,34 @@ private const val COMMAND_FORWARD = "forward "
 private const val COMMAND_DOWN = "down "
 private const val COMMAND_UP = "up "
 
+private val REGEX = """(\d)""".toRegex()
+
 fun main() {
     fun part1(input: List<String>) : Int {
-        val regex = """(\d)""".toRegex()
         var horizontalPosition = 0
         var depthPosition = 0
         input.forEach { command ->
             when {
-                command.startsWith(COMMAND_FORWARD) -> horizontalPosition += regex.find(command)?.value?.toInt() ?: error(REGEX_ERROR)
-                command.startsWith(COMMAND_DOWN) ->  depthPosition += regex.find(command)?.value?.toInt() ?: error(REGEX_ERROR)
-                command.startsWith(COMMAND_UP) ->  depthPosition -= regex.find(command)?.value?.toInt() ?: error(REGEX_ERROR)
+                command.startsWith(COMMAND_FORWARD) -> horizontalPosition += REGEX.find(command)?.value?.toInt() ?: error(REGEX_ERROR)
+                command.startsWith(COMMAND_DOWN) ->  depthPosition += REGEX.find(command)?.value?.toInt() ?: error(REGEX_ERROR)
+                command.startsWith(COMMAND_UP) ->  depthPosition -= REGEX.find(command)?.value?.toInt() ?: error(REGEX_ERROR)
             }
         }
         return horizontalPosition * depthPosition
     }
 
     fun part2(input: List<String>): Int {
-        val regex = """(\d)""".toRegex()
         var horizontalPosition = 0
         var depthPosition = 0
         var aim = 0
         input.forEach { command ->
             when {
                 command.startsWith(COMMAND_FORWARD) -> {
-                    horizontalPosition += regex.find(command)?.value?.toInt() ?: error(REGEX_ERROR)
-                    depthPosition += aim * (regex.find(command)?.value?.toInt() ?: error(REGEX_ERROR))
+                    horizontalPosition += REGEX.find(command)?.value?.toInt() ?: error(REGEX_ERROR)
+                    depthPosition += aim * (REGEX.find(command)?.value?.toInt() ?: error(REGEX_ERROR))
                 }
-                command.startsWith(COMMAND_DOWN) ->  aim += regex.find(command)?.value?.toInt() ?: error(REGEX_ERROR)
-                command.startsWith(COMMAND_UP) ->  aim -= regex.find(command)?.value?.toInt() ?: error(REGEX_ERROR)
+                command.startsWith(COMMAND_DOWN) ->  aim += REGEX.find(command)?.value?.toInt() ?: error(REGEX_ERROR)
+                command.startsWith(COMMAND_UP) ->  aim -= REGEX.find(command)?.value?.toInt() ?: error(REGEX_ERROR)
             }
         }
         return horizontalPosition * depthPosition
